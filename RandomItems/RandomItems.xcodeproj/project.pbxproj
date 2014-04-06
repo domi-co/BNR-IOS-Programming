@@ -11,6 +11,7 @@
 		9614E96D18EDD4EA00FD0670 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9614E96C18EDD4EA00FD0670 /* main.m */; };
 		9614E97118EDD4EA00FD0670 /* RandomItems.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9614E97018EDD4EA00FD0670 /* RandomItems.1 */; };
 		9614E97918EDD77C00FD0670 /* BNRItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9614E97818EDD77C00FD0670 /* BNRItem.m */; };
+		9614E97C18F1E38D00FD0670 /* BNRContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9614E97B18F1E38D00FD0670 /* BNRContainer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -34,6 +35,8 @@
 		9614E97018EDD4EA00FD0670 /* RandomItems.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = RandomItems.1; sourceTree = "<group>"; };
 		9614E97718EDD77C00FD0670 /* BNRItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNRItem.h; sourceTree = "<group>"; };
 		9614E97818EDD77C00FD0670 /* BNRItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRItem.m; sourceTree = "<group>"; };
+		9614E97A18F1E38D00FD0670 /* BNRContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNRContainer.h; sourceTree = "<group>"; };
+		9614E97B18F1E38D00FD0670 /* BNRContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRContainer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +81,8 @@
 			children = (
 				9614E96C18EDD4EA00FD0670 /* main.m */,
 				9614E97718EDD77C00FD0670 /* BNRItem.h */,
+				9614E97A18F1E38D00FD0670 /* BNRContainer.h */,
+				9614E97B18F1E38D00FD0670 /* BNRContainer.m */,
 				9614E97818EDD77C00FD0670 /* BNRItem.m */,
 				9614E97018EDD4EA00FD0670 /* RandomItems.1 */,
 				9614E96E18EDD4EA00FD0670 /* Supporting Files */,
@@ -146,6 +151,7 @@
 			files = (
 				9614E96D18EDD4EA00FD0670 /* main.m in Sources */,
 				9614E97918EDD77C00FD0670 /* BNRItem.m in Sources */,
+				9614E97C18F1E38D00FD0670 /* BNRContainer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
