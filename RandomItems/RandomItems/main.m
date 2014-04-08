@@ -16,15 +16,20 @@ int main(int argc, const char * argv[])
         
         NSMutableArray *items = [[NSMutableArray alloc] init];
         
-        for (int i = 0; i < 10; i++) {
-            BNRItem *item = [BNRItem randomItem];
-            [items addObject:item];
-        }
+        BNRItem *backpack = [[BNRItem alloc] initWithItemName:@"Backpack"];
+        [items addObject:backpack];
+        
+        BNRItem *calculator = [[BNRItem alloc] initWithItemName:@"Calculator"];
+        
+        backpack.containedItem = calculator;
+        backpack = nil;
+        calculator = nil;
         
         for (NSString *item in items) {
             NSLog(@"%@", item);
         }
         
+        NSLog(@"Setting items to nil");
         items = nil;
     }
     return 0;
