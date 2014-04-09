@@ -47,10 +47,42 @@
     [[UIColor lightGrayColor] setStroke];
     [path stroke];
     
+    // backup context
+    CGContextRef currentContext = UIGraphicsGetCurrentContext();
+    CGContextSaveGState(currentContext);
+
+    // create clipping
+    CGPoint startPoint = CGPointMake(center.x, bounds.size.height / 4.0);
+    UIBezierPath *clippingPath = [[UIBezierPath alloc] init];
+    [clippingPath moveToPoint:startPoint];
+    [clippingPath addLineToPoint:CGPointMake(3 * bounds.size.width / 4.0, 3 * bounds.size.height / 4.0)];
+    [clippingPath addLineToPoint:CGPointMake(bounds.size.width / 4.0, 3 * bounds.size.height / 4.0)];
+    [clippingPath addLineToPoint:startPoint];
+    [clippingPath addClip];
+    
+    // create gradient
+    CGFloat locations[2] = {0.0, 1.0};
+    CGFloat components[8] = {0.0, 1.0, 0.0, 1.0, 1.0, 1.0, 0.0, 1.0};
+    CGColorSpaceRef colorspace = CGColorSpaceCreateDeviceRGB();
+    CGGradientRef gradient = CGGradientCreateWithColorComponents(colorspace, components, locations, 2);
+
+    CGPoint endPoint = CGPointMake(center.x, 3 * bounds.size.height / 4.0);
+    CGContextDrawLinearGradient(currentContext, gradient, startPoint, endPoint, 0);
+
+    // restore context
+    CGContextRestoreGState(currentContext);
+
+    // backup context
+    CGContextSaveGState(currentContext);
+    CGContextSetShadow(currentContext, CGSizeMake(4, 7), 3);
+    
     UIImage *logoImage = [UIImage imageNamed:@"logo.png"];
     CGRect logoFrame = CGRectMake(bounds.size.width / 4.0, bounds.size.height / 4.0
                            , bounds.size.width / 2.0, bounds.size.height / 2.0);
     [logoImage drawInRect:logoFrame];
+    
+    // restore context
+    CGContextRestoreGState(currentContext);
 }
 
 @end
