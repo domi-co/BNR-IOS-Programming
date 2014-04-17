@@ -23,10 +23,14 @@
     return self;
 }
 
-- (void)loadView
++ (NSArray *)colors
 {
-    BNRHypnosisView *backgroundView = [[BNRHypnosisView alloc] init];
-    self.view = backgroundView;
+    return @[[UIColor redColor], [UIColor greenColor], [UIColor blueColor]];
+}
+
+- (IBAction)changeColor:(UISegmentedControl *)sender
+{
+    self.hypnosisView.circleColor = [BNRHypnosisViewController colors][sender.selectedSegmentIndex];
 }
 
 - (void)viewDidLoad

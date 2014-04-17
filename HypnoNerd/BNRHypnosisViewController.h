@@ -7,7 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "BNRHypnosisView.h"
 
 @interface BNRHypnosisViewController : UIViewController
+
+@property (nonatomic, weak) IBOutlet BNRHypnosisView* hypnosisView;
+
+- (IBAction)changeColor:(UISegmentedControl *)sender;
 
 @end

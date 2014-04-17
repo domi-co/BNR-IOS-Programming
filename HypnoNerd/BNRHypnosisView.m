@@ -8,12 +8,6 @@
 
 #import "BNRHypnosisView.h"
 
-@interface BNRHypnosisView ()
-
-@property (strong, nonatomic) UIColor *circleColor;
-
-@end
-
 @implementation BNRHypnosisView
 
 - (id)initWithFrame:(CGRect)frame
@@ -53,31 +47,6 @@
     path.lineWidth = 10;
     [self.circleColor setStroke];
     [path stroke];
-    
-    // Add a UISegmentedControl
-    CGRect segmentedFrame;
-    segmentedFrame.origin.x = bounds.size.width / 2.0 - 60;
-    segmentedFrame.origin.y = bounds.size.height - 100;
-    segmentedFrame.size.height = 20;
-    segmentedFrame.size.width = 120;
-    UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:[[BNRHypnosisView colors] allKeys]];
-    segmentedControl.frame = segmentedFrame;
-    [segmentedControl addTarget:self
-                         action:@selector(changeColor:)
-               forControlEvents:UIControlEventValueChanged];
-    [self addSubview:segmentedControl];
-}
-
-+ (NSDictionary *)colors
-{
-    return @{@"Red":[UIColor redColor],
-             @"Green":[UIColor greenColor],
-             @"Blue":[UIColor blueColor]};
-}
-
-- (void)changeColor:(UISegmentedControl *)sender
-{
-    self.circleColor = [[BNRHypnosisView colors] allValues][sender.selectedSegmentIndex];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
