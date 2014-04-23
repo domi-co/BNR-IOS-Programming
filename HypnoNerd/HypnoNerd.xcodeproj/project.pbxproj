@@ -210,6 +210,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = coissard.com;
 				TargetAttributes = {
+					96DBE1D718FEFE3900254EEA = {
+						DevelopmentTeam = 9NDN9XZE97;
+					};
 					96DBE1F218FEFE3900254EEA = {
 						TestTargetID = 96DBE1D718FEFE3900254EEA;
 					};
@@ -380,10 +383,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HypnoNerd/HypnoNerd-Prefix.pch";
 				INFOPLIST_FILE = "HypnoNerd/HypnoNerd-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -393,10 +399,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HypnoNerd/HypnoNerd-Prefix.pch";
 				INFOPLIST_FILE = "HypnoNerd/HypnoNerd-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -460,6 +469,7 @@
 				96DBE20618FEFE3900254EEA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		96DBE20718FEFE3900254EEA /* Build configuration list for PBXNativeTarget "HypnoNerdTests" */ = {
 			isa = XCConfigurationList;
@@ -468,6 +478,7 @@
 				96DBE20918FEFE3900254EEA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
