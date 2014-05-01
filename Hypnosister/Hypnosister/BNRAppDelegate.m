@@ -9,6 +9,12 @@
 #import "BNRAppDelegate.h"
 #import "BNRHypnosisView.h"
 
+@interface BNRAppDelegate()
+
+@property (strong, nonatomic) BNRHypnosisView* hypnosisView;
+
+@end
+
 @implementation BNRAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -16,25 +22,24 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     CGRect screenRect = self.window.bounds;
-    CGRect bigRect = screenRect;
-    bigRect.size.width *= 2;
     
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:screenRect];
     [self.window addSubview:scrollView];
-    scrollView.pagingEnabled = YES;
+    scrollView.pagingEnabled = NO;
+    scrollView.delegate = self;
+    scrollView.maximumZoomScale = 2.0;
     
-    BNRHypnosisView *hypnosisView = [[BNRHypnosisView alloc] initWithFrame:screenRect];
-    [scrollView addSubview:hypnosisView];
+    self.hypnosisView = [[BNRHypnosisView alloc] initWithFrame:screenRect];
+    [scrollView addSubview:self.hypnosisView];
 
-    screenRect.origin.x += screenRect.size.width;
-    BNRHypnosisView *anotherView = [[BNRHypnosisView alloc] initWithFrame:screenRect];
-    [scrollView addSubview:anotherView];
-    
-    scrollView.contentSize = bigRect.size;
-    
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
+}
+
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
+{
+    return self.hypnosisView;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
