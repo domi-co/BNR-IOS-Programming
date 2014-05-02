@@ -30,7 +30,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[[BNRItemStore sharedStore] allItems] count];
+    return [[[BNRItemStore sharedStore] allItems] count] + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -39,9 +39,12 @@
                                                             forIndexPath:indexPath];
                                  
     NSArray *items = [[BNRItemStore sharedStore] allItems];
-    BNRItem *item = items[indexPath.row];
-    
-    cell.textLabel.text = [item description];
+    if (indexPath.row < [items count]) {
+        BNRItem *item = items[indexPath.row];
+        cell.textLabel.text = [item description];
+    } else {
+        cell.textLabel.text = @"No more items!";
+    }
     
     return cell;
 }
