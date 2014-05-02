@@ -30,7 +30,16 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[[BNRItemStore sharedStore] allItems] count];
+    if (section == 0) {
+        return [[self smallItems] count];
+    } else {
+        return [[self bigItems] count];
+    }
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 2;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -38,12 +47,30 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell"
                                                             forIndexPath:indexPath];
                                  
-    NSArray *items = [[BNRItemStore sharedStore] allItems];
-    BNRItem *item = items[indexPath.row];
+    BNRItem *item = nil;
+    if (indexPath.section == 0) {
+        item = [self smallItems][indexPath.row];
+    } else {
+        item = [self bigItems][indexPath.row];
+    }
     
     cell.textLabel.text = [item description];
     
     return cell;
+}
+
+- (NSArray *)smallItems
+{
+    NSArray *items = [[BNRItemStore sharedStore] allItems];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"valueInDollars < %f", 50.0];
+    return [items filteredArrayUsingPredicate:predicate];
+}
+
+- (NSArray *)bigItems
+{
+    NSArray *items = [[BNRItemStore sharedStore] allItems];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"valueInDollars >= %f", 50.0];
+    return [items filteredArrayUsingPredicate:predicate];
 }
 
 - (void)viewDidLoad
