@@ -35,18 +35,29 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell"
-                                                            forIndexPath:indexPath];
-                                 
+    UITableViewCell *cell = nil;
     NSArray *items = [[BNRItemStore sharedStore] allItems];
+    cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell"
+                                           forIndexPath:indexPath];
     if (indexPath.row < [items count]) {
         BNRItem *item = items[indexPath.row];
         cell.textLabel.text = [item description];
+        cell.textLabel.font = [UIFont systemFontOfSize:20];
     } else {
         cell.textLabel.text = @"No more items!";
+        cell.textLabel.font = [UIFont systemFontOfSize:17];
     }
     
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == [[[BNRItemStore sharedStore] allItems] count]) {
+        return 20.0;
+    } else {
+        return 60.0;
+    }
 }
 
 - (void)viewDidLoad
@@ -54,6 +65,10 @@
     [super viewDidLoad];
     [self.tableView registerClass:[UITableViewCell class]
            forCellReuseIdentifier:@"UITableViewCell"];
+    // add a background view
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"iphone7" ofType:@"jpg"];
+    UIImage *backgroundImage = [UIImage imageWithContentsOfFile:filePath];
+    self.tableView.backgroundView = [[UIImageView alloc] initWithImage:backgroundImage];
 }
 
 @end
