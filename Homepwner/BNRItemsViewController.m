@@ -33,7 +33,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[[BNRItemStore sharedStore] allItems] count];
+    return [[[BNRItemStore sharedStore] allItems] count] + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -42,9 +42,12 @@
                                                             forIndexPath:indexPath];
                                  
     NSArray *items = [[BNRItemStore sharedStore] allItems];
-    BNRItem *item = items[indexPath.row];
-    
-    cell.textLabel.text = [item description];
+    if (indexPath.row == [items count]) {
+        cell.textLabel.text = @"No more items";
+    } else {
+        BNRItem *item = items[indexPath.row];
+        cell.textLabel.text = [item description];
+    }
     
     return cell;
 }
@@ -105,4 +108,25 @@
                                         toIndex:destinationIndexPath.row];
 }
 
+- (NSIndexPath *)tableView:(UITableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath
+{
+    NSUInteger maxRow = [[BNRItemStore sharedStore] count];
+    if (sourceIndexPath.row == maxRow) {
+        return sourceIndexPath;
+    } else if (proposedDestinationIndexPath.row == maxRow) {
+        NSIndexPath *newPath = [NSIndexPath indexPathForItem:(maxRow-1) inSection:0];
+        return newPath;
+    } else {
+        return proposedDestinationIndexPath;
+    }
+}
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == [[BNRItemStore sharedStore] count]) {
+        return UITableViewCellEditingStyleNone;
+    } else {
+        return UITableViewCellEditingStyleDelete;
+    }
+}
 @end

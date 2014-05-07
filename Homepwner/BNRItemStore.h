@@ -17,4 +17,5 @@
 - (void)removeItem:(BNRItem *)item;
 - (void)moveItemAtIndex:(NSUInteger)fromIndex
                 toIndex:(NSUInteger)toIndex;
+- (NSUInteger)count;
 @end

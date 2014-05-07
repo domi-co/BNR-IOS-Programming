@@ -71,4 +71,8 @@
     [self.privateItems insertObject:item atIndex:toIndex];
 }
 
+- (NSUInteger)count
+{
+    return [_privateItems count];
+}
 @end
