@@ -20,6 +20,13 @@
 
 @implementation BNRDetailViewController
 
+-(void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [self.valueField resignFirstResponder];
+    [self.nameField resignFirstResponder];
+    [self.serialField resignFirstResponder];
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
