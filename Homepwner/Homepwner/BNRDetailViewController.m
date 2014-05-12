@@ -8,6 +8,7 @@
 
 #import "BNRDetailViewController.h"
 #import "BNRItem.h"
+#import "BNRDateViewController.h"
 
 @interface BNRDetailViewController ()
 
@@ -19,6 +20,13 @@
 @end
 
 @implementation BNRDetailViewController
+
+- (IBAction)changeDate:(id)sender {
+    BNRDateViewController *dateController = [[BNRDateViewController alloc] init];
+    dateController.item = self.item;
+    
+    [self.navigationController pushViewController:dateController animated:YES];
+}
 
 -(void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
