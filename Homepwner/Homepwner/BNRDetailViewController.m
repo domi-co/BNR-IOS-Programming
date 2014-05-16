@@ -9,6 +9,7 @@
 #import "BNRDetailViewController.h"
 #import "BNRItem.h"
 #import "BNRImageStore.h"
+#import "BNROverlayView.h"
 
 @interface BNRDetailViewController () <UINavigationControllerDelegate,
                                         UIImagePickerControllerDelegate, UITextFieldDelegate>
@@ -57,6 +58,7 @@
     
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         [imagePicker setSourceType:UIImagePickerControllerSourceTypeCamera];
+        imagePicker.cameraOverlayView = [self overlay];
     } else {
         [imagePicker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
     }
@@ -64,6 +66,16 @@
     imagePicker.allowsEditing = YES;
     
     [self presentViewController:imagePicker animated:YES completion:nil];
+}
+
+- (UIView *)overlay
+{
+    CGRect bounds = self.view.bounds;
+    NSUInteger size = 20;
+    CGRect rect = CGRectMake(bounds.size.width / 2.0 - size, bounds.size.height / 2.0 - size, 2 * size, 2 * size);
+    BNROverlayView *overlay = [[BNROverlayView alloc] initWithFrame:rect];
+    
+    return overlay;
 }
 
 - (void)viewWillAppear:(BOOL)animated
