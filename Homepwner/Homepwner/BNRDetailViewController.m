@@ -8,8 +8,10 @@
 
 #import "BNRDetailViewController.h"
 #import "BNRItem.h"
+#import "BNRImageStore.h"
 
-@interface BNRDetailViewController ()
+@interface BNRDetailViewController () <UINavigationControllerDelegate,
+                                        UIImagePickerControllerDelegate, UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *nameField;
 @property (weak, nonatomic) IBOutlet UITextField *serialField;
@@ -22,9 +24,21 @@
 
 @implementation BNRDetailViewController
 
+- (IBAction)backgroundTapped:(id)sender {
+    [self.view endEditing:YES];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
+
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     UIImage *image = info[UIImagePickerControllerOriginalImage];
+    [[BNRImageStore sharedStore] setImage:image forKey:self.item.itemKey];
+    
     self.imageView.image = image;
     
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -61,6 +75,14 @@
     }
     
     self.dateLabel.text = [dateFormatter stringFromDate:item.dateCreated];
+    
+    NSString *imageKey = self.item.itemKey;
+    
+    // Get image
+    UIImage *imageToDisplay = [[BNRImageStore sharedStore] imageForKey:imageKey];
+    
+    // Use image to put on screen
+    self.imageView.image = imageToDisplay;
 }
 
 - (void)viewWillDisappear:(BOOL)animated
