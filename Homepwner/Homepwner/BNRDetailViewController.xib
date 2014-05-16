@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BNRDetailViewController">
             <connections>
+                <outlet property="clearImageButton" destination="aln-Ge-FmM" id="Aai-pa-5RO"/>
                 <outlet property="dateLabel" destination="9hQ-Ss-jaW" id="5QF-gq-ya7"/>
                 <outlet property="imageView" destination="7jB-tN-IMb" id="uB6-95-Ven"/>
                 <outlet property="nameField" destination="cTc-zi-qpf" id="ph2-yV-RRa"/>
@@ -90,6 +91,16 @@
                         </barButtonItem>
                     </items>
                 </toolbar>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aln-Ge-FmM">
+                    <rect key="frame" x="142" y="494" width="37" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="Clear">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="clearImage:" destination="-1" eventType="touchUpInside" id="XEL-TG-8gk"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>

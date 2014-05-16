@@ -19,10 +19,18 @@
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIToolbar *toollBar;
+@property (weak, nonatomic) IBOutlet UIButton *clearImageButton;
 
 @end
 
 @implementation BNRDetailViewController
+
+- (IBAction)clearImage:(id)sender {
+    NSString *key = self.item.itemKey;
+    [[BNRImageStore sharedStore] deleteImageForKey:key];
+    self.imageView.image = nil;
+    self.clearImageButton.enabled = NO;
+}
 
 - (IBAction)backgroundTapped:(id)sender {
     [self.view endEditing:YES];
@@ -84,6 +92,9 @@
     
     // Use image to put on screen
     self.imageView.image = imageToDisplay;
+    if (imageToDisplay) {
+        self.clearImageButton.enabled = YES;
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
