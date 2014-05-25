@@ -26,11 +26,13 @@
 
 - (void)saveLines
 {
+    NSLog(@"saveLines");
     [NSKeyedArchiver archiveRootObject:self.drawView.finishedLines toFile:[self linesArchivePath]];
 }
 
 - (NSMutableArray *)restoreLines
 {
+    NSLog(@"restoreLines");
     NSMutableArray *lines = [NSKeyedUnarchiver unarchiveObjectWithFile:[self linesArchivePath]];
     if (!lines) {
         lines = [[NSMutableArray alloc] init];

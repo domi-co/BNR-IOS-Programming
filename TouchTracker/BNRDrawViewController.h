@@ -10,4 +10,6 @@
 
 @interface BNRDrawViewController : UIViewController
 
+- (void)saveLines;
+
 @end
