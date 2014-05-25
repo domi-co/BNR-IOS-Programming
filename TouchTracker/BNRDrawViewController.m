@@ -9,11 +9,44 @@
 #import "BNRDrawViewController.h"
 #import "BNRDrawView.h"
 
+@interface BNRDrawViewController()
+
+@property (nonatomic, strong) BNRDrawView *drawView;
+
+@end
+
 @implementation BNRDrawViewController
 
 - (void)loadView
 {
-    self.view = [[BNRDrawView alloc] initWithFrame:CGRectZero];
+    self.drawView = [[BNRDrawView alloc] initWithFrame:CGRectZero];
+    self.view = self.drawView;
+    self.drawView.finishedLines = [self restoreLines];
 }
 
+- (void)saveLines
+{
+    [NSKeyedArchiver archiveRootObject:self.drawView.finishedLines toFile:[self linesArchivePath]];
+}
+
+- (NSMutableArray *)restoreLines
+{
+    NSMutableArray *lines = [NSKeyedUnarchiver unarchiveObjectWithFile:[self linesArchivePath]];
+    if (!lines) {
+        lines = [[NSMutableArray alloc] init];
+    }
+    return lines;
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self saveLines];
+}
+
+- (NSString *)linesArchivePath {
+    NSArray* documentDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString* documentDirectory = [documentDirectories firstObject];
+    return [documentDirectory stringByAppendingPathComponent:@"lines.archive"];
+}
 @end

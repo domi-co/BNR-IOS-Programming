@@ -12,7 +12,6 @@
 @interface BNRDrawView()
 
 @property (nonatomic, strong) NSMutableDictionary *linesInProgress;
-@property (nonatomic, strong) NSMutableArray *finishedLines;
 
 @end
 
@@ -23,7 +22,6 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.linesInProgress = [[NSMutableDictionary alloc] init];
-        self.finishedLines = [[NSMutableArray alloc] init];
         self.backgroundColor = [UIColor grayColor];
         self.multipleTouchEnabled = YES;
     }
@@ -110,4 +108,5 @@
     [self setNeedsDisplay];
     
 }
+
 @end
