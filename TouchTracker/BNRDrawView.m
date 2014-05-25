@@ -43,8 +43,8 @@
 
 - (void)drawRect:(CGRect)rect
 {
-    [[UIColor blackColor] set];
     for (BNRLine *line in self.finishedLines) {
+        [[self determineColorForLine:line] set];
         [self strokeLine:line];
     }
     
@@ -52,6 +52,19 @@
     for (NSValue *key in self.linesInProgress) {
         [self strokeLine:self.linesInProgress[key]];
     }
+}
+
+- (UIColor *)determineColorForLine:(BNRLine *)line
+{
+    double deltaY = line.begin.y - line.end.y;
+    double deltaX = line.end.x - line.begin.x;
+    double angle = atan2 (deltaY , deltaX);
+    if (angle < 0) {
+        angle += 2 * M_PI;
+    }
+    NSLog(@"%f", angle);
+    double hue = angle / (2*M_PI);
+    return [UIColor colorWithHue:hue saturation:1 brightness:1 alpha:1];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
